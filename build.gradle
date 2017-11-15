@@ -1,0 +1,58 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "26.0.0"
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    testCompile 'junit:junit:4.12'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.trello:rxlifecycle:1.0'
+    compile 'com.trello:rxlifecycle-components:1.0'
+    /*rotrofit*/
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
+    compile 'com.google.code.gson:gson:2.8.0'
+    /*查看http日志*/
+    compile 'com.squareup.okhttp3:logging-interceptor:3.1.2'
+    // compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.0.0-beta4'
+}
+/*publish {
+    repoName = 'icefordogmaven'//远程仓库名字,不指明，默认是上传到maven
+    userOrg = 'icefordog'//bintray.com的用户名
+    groupId = 'com.icefordog'//jcenter上的路径（DgroupId）
+    artifactId = 'rehttputils'//项目名称（DartifactId）
+    publishVersion = '1.0.0'//版本号
+    desc = '基于retrofit+rxjava 的网络请求封装 含有下载'//描述，不重要
+    //website = siteUrl//项目主页
+}
+tasks.withType(Javadoc) {//防止编码问题
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}*/
