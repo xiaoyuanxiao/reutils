@@ -41,4 +41,16 @@ public class DownloadUtils {
         };
         return downLoadAPI.download(url, file, downloadInterceptor1);
     }
+
+    public static Subscription downloadOnthis(String url, File file, final DownloadProgressListener downloadInterceptor) {
+        DownLoadAPI downLoadAPI = DownLoadAPI.newInstans();
+        final long length = file.length();//上次下载位置
+        DownloadProgressListener downloadInterceptor1 = new DownloadProgressListener() {
+            @Override
+            public void update(long read, long count, boolean done) {
+                downloadInterceptor.update(read + length, count + length, done);
+            }
+        };
+        return downLoadAPI.downloadOnthis(url, file, downloadInterceptor1);
+    }
 }

@@ -1,9 +1,11 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'com.novoda.bintray-release'
 android {
     compileSdkVersion 25
     buildToolsVersion "26.0.0"
-
+    lintOptions {
+        abortOnError false
+    }
     defaultConfig {
         minSdkVersion 22
         targetSdkVersion 25
@@ -19,10 +21,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-
 }
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -42,17 +41,17 @@ dependencies {
     // compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile 'com.squareup.retrofit2:converter-scalars:2.0.0-beta4'
 }
-/*publish {
+publish {
     repoName = 'icefordogmaven'//远程仓库名字,不指明，默认是上传到maven
     userOrg = 'icefordog'//bintray.com的用户名
     groupId = 'com.icefordog'//jcenter上的路径（DgroupId）
     artifactId = 'rehttputils'//项目名称（DartifactId）
-    publishVersion = '1.0.0'//版本号
-    desc = '基于retrofit+rxjava 的网络请求封装 含有下载'//描述，不重要
+    publishVersion = '1.0.1'//版本号
+    desc = '添加'//描述，不重要
     //website = siteUrl//项目主页
 }
 tasks.withType(Javadoc) {//防止编码问题
     options.addStringOption('Xdoclint:none', '-quiet')
     options.addStringOption('encoding', 'UTF-8')
     options.addStringOption('charSet', 'UTF-8')
-}*/
+}

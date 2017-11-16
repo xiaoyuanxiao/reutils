@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../jmoalib.iml" filepath="$PROJECT_DIR$/../jmoalib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reutils.iml" filepath="$PROJECT_DIR$/reutils.iml" />
+    </modules>
+  </component>
+</project>
