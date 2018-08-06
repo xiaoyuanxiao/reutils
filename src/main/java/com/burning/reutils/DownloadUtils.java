@@ -36,7 +36,14 @@ public class DownloadUtils {
         DownloadProgressListener downloadInterceptor1 = new DownloadProgressListener() {
             @Override
             public void update(long read, long count, boolean done) {
-                downloadInterceptor.update(read + length, count + length, done);
+                if (downloadInterceptor != null)
+                    downloadInterceptor.update(read + length, count + length, done);
+            }
+
+            @Override
+            public void onFail(Throwable e) {
+                if (downloadInterceptor != null)
+                    downloadInterceptor.onFail(e);
             }
         };
         return downLoadAPI.download(url, file, downloadInterceptor1);
@@ -48,7 +55,14 @@ public class DownloadUtils {
         DownloadProgressListener downloadInterceptor1 = new DownloadProgressListener() {
             @Override
             public void update(long read, long count, boolean done) {
-                downloadInterceptor.update(read + length, count + length, done);
+                if (downloadInterceptor != null)
+                    downloadInterceptor.update(read + length, count + length, done);
+            }
+
+            @Override
+            public void onFail(Throwable e) {
+                if (downloadInterceptor != null)
+                    downloadInterceptor.onFail(e);
             }
         };
         return downLoadAPI.downloadOnthis(url, file, downloadInterceptor1);

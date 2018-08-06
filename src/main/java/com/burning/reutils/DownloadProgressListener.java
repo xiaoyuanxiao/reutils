@@ -25,4 +25,6 @@ package com.burning.reutils;
 
 public interface DownloadProgressListener {
     void update(long read, long count, boolean done);
+
+    void onFail(Throwable e);
 }

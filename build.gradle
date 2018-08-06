@@ -1,13 +1,16 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+
 android {
     compileSdkVersion 25
-    buildToolsVersion "26.0.0"
+    buildToolsVersion '27.0.3'
     lintOptions {
         abortOnError false
     }
+    packagingOptions {//加上这写代码
+        exclude 'META-INF/rxjava.properties'
+    }
     defaultConfig {
-        minSdkVersion 22
+        minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -20,35 +23,34 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
 }
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    testCompile 'junit:junit:4.12'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    compile 'com.trello:rxlifecycle:1.0'
-    compile 'com.trello:rxlifecycle-components:1.0'
-    /*rotrofit*/
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
-    compile 'com.google.code.gson:gson:2.8.0'
-    /*查看http日志*/
-    compile 'com.squareup.okhttp3:logging-interceptor:3.1.2'
-    // compile 'com.google.android.gms:play-services-appindexing:8.4.0'
-    compile 'com.squareup.retrofit2:converter-scalars:2.0.0-beta4'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //------------------------------------------------------
+    api 'com.squareup.retrofit2:retrofit:2.3.0'//retrofit---
+    api 'com.squareup.retrofit2:adapter-rxjava:2.3.0'//--rxjava
+    api 'com.squareup.retrofit2:converter-scalars:2.0.0'//string字符解析扩展
+    api 'com.squareup.retrofit2:converter-gson:2.3.0'//---gsom 扩展
+    api 'com.trello:rxlifecycle-components:1.0'//rxlifecycle 管理添加 并添加 线程回调
+    //-----------------------------------------------------
 }
 publish {
     repoName = 'icefordogmaven'//远程仓库名字,不指明，默认是上传到maven
     userOrg = 'icefordog'//bintray.com的用户名
     groupId = 'com.icefordog'//jcenter上的路径（DgroupId）
     artifactId = 'rehttputils'//项目名称（DartifactId）
-    publishVersion = '1.0.1'//版本号
-    desc = '添加'//描述，不重要
-    //website = siteUrl//项目主页
+    publishVersion = '2.0.0'//版本号
+    desc = '修改依赖---修复由于之前的错误依赖添加引发的问题--' +
+            '以及增加下载错误提示' //描述，不重要
+    website = ' xxxx'//项目主页a
 }
 tasks.withType(Javadoc) {//防止编码问题
     options.addStringOption('Xdoclint:none', '-quiet')

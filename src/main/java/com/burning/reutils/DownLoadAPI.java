@@ -49,7 +49,7 @@ public class DownLoadAPI {
         return downLoadAPI;
     }
 
-    Subscription download(final String url, final File file, DownloadProgressListener interceptor) {
+    Subscription download(final String url, final File file, final DownloadProgressListener interceptor) {
 
         return download(new MysubCribe<ResponseBody, DownLoadService>() {
             @Override
@@ -60,27 +60,29 @@ public class DownLoadAPI {
             @Override
             public void onCompleted() {
 
-                System.out.println("onCompleted============");
+                //   System.out.println("onCompleted============");
             }
 
             @Override
             public void onError(Throwable e) {
-                System.out.println("Throwable=====Throwable====" + e.toString());
+                interceptor.onFail(e);
+                // System.out.println("Throwable=====Throwable====" + e.toString());
             }
 
             @Override
             public void onNext(ResponseBody o) {
                 try {
                     writeCache(o, file);
-                } catch (Exception e) {
-                    System.out.println("==onNext==" + e.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+
             }
         }, new DownloadInterceptor(interceptor));
 
     }
 
-    public Subscription downloadOnthis(final String url, final File file, DownloadProgressListener interceptor) {
+    public Subscription downloadOnthis(final String url, final File file, final DownloadProgressListener interceptor) {
         return downloadOnthis(new MysubCribe<ResponseBody, DownLoadService>() {
             @Override
             public Observable getObservable(DownLoadService retrofit) {
@@ -90,12 +92,11 @@ public class DownLoadAPI {
             @Override
             public void onCompleted() {
 
-                System.out.println("onCompleted============");
             }
 
             @Override
             public void onError(Throwable e) {
-                System.out.println("Throwable=====Throwable====" + e.toString());
+                interceptor.onFail(e);
             }
 
             @Override
